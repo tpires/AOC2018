@@ -3,12 +3,13 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"strconv"
 )
 
 func main() {
-	freqs, err := ReadFileFromStdin()
+	freqs, err := ReadFrom(os.Stdin)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
 		panic(err)
@@ -21,9 +22,9 @@ func main() {
 	fmt.Println(FindFirstFrequencyRepeated(freqsInt))
 }
 
-func ReadFileFromStdin() ([]string, error) {
+func ReadFrom(input io.Reader) ([]string, error) {
 	boxes := make([]string, 0)
-	scanner := bufio.NewScanner(os.Stdin)
+	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
 		str := fmt.Sprintf("%s", scanner.Text())
 		boxes = append(boxes, str)

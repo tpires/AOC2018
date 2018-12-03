@@ -1,11 +1,36 @@
 package main_test
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/cheekybits/is"
 	v "github.com/tpires/AOC2018/day2/two"
 )
+
+func TestReadFromSingleExample(t *testing.T) {
+	is := is.New(t)
+	str := "abcdef"
+	expected := []string{"abcdef"}
+	boxes, err := v.ReadFrom(strings.NewReader(str))
+
+	is.NoErr(err)
+	is.Equal(len(boxes), 1)
+
+	is.Equal(boxes, expected)
+}
+
+func TestReadFromExample(t *testing.T) {
+	is := is.New(t)
+	str := "abcdef\nbababc\nabbcde"
+	expected := []string{"abcdef", "bababc", "abbcde"}
+	boxes, err := v.ReadFrom(strings.NewReader(str))
+
+	is.NoErr(err)
+	is.Equal(len(boxes), 3)
+
+	is.Equal(boxes, expected)
+}
 
 func TestCompareEqualStrings(t *testing.T) {
 	is := is.New(t)

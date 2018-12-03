@@ -1,11 +1,24 @@
 package main_test
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/cheekybits/is"
 	v "github.com/tpires/AOC2018/day1/one"
 )
+
+func TestReadFromExample(t *testing.T) {
+	is := is.New(t)
+	str := "+1\n-2\n+3\n+1"
+	expected := []string{"+1", "-2", "+3", "+1"}
+	freqs, err := v.ReadFrom(strings.NewReader(str))
+
+	is.NoErr(err)
+	is.Equal(len(freqs), 4)
+
+	is.Equal(freqs, expected)
+}
 
 func TestExampleProcessFrequencies(t *testing.T) {
 	is := is.New(t)
